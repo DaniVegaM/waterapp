@@ -3,16 +3,18 @@ package fingerfire.com.waterseven
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -22,10 +24,11 @@ import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 
+val count = mutableStateOf(0f)
+
 @Composable
 fun InfoWater() {
     // Declaração do count
-    val count: MutableState<Float> = mutableStateOf(0f)
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -39,16 +42,17 @@ fun InfoWater() {
             color = MaterialTheme.colors.primary,
             text = "Você já bebeu ${count.value} litro de água hoje" // Resultado
         )
-        Box(
+        Row(
             modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             // Botões e lógica de incremento e decremento
             Button(
                 onClick = { count.value += 0.5f },
                 modifier = Modifier
-                    .padding(top = 5.dp, end = 8.dp)
-                    .size(40.dp)
+                    .padding(end = 8.dp)
+                    .height(40.dp)
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_water),
@@ -65,12 +69,11 @@ fun InfoWater() {
                     }
                 },
                 modifier = Modifier
-                    .padding(top = 5.dp, end = 8.dp)
-                    .size(40.dp)
+                    .height(40.dp)
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_remove_water),
-                    contentDescription = "Reset",
+                    contentDescription = "Remove",
                     modifier = Modifier
                         .size(ButtonDefaults.DefaultButtonSize)
                         .wrapContentSize(align = Alignment.Center),
@@ -83,7 +86,11 @@ fun InfoWater() {
         ) {
             Button(
                 onClick = { count.value = 0f },
-                modifier = Modifier.size(30.dp)
+                modifier = Modifier.size(30.dp),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color.Red, // Cor do fundo
+                    contentColor = Color.White // Cor do texto
+                )
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_reset),

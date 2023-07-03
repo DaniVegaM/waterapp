@@ -11,19 +11,19 @@ import androidx.wear.compose.material.CircularProgressIndicator
 
 @Composable
 fun ProgressIndicatorWater() {
-    // Aqui você pode incluir a lógica do progresso e contagem da água
+    val recomedByDay = 3.0f
+    val progressOfDay: Float = count.value / recomedByDay
 
-    // Box para centralizar
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         CircularProgressIndicator(
             startAngle = 295f,
             endAngle = 245f,
-            progress = 0.5f, // Exemplo de valor de progresso
+            progress = progressOfDay, // Valor do progresso
             strokeWidth = 5.dp,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(all = 10.dp)
         )
-        InfoWater() // Importação do novo Compose
+        InfoWater()
     }
 }
