@@ -7,9 +7,6 @@
   <img alt="MVVM" src="https://img.shields.io/badge/Jetpack Compose-Interface-orange"/>
 </p>
 
-<p align="center">
-  <img src="https://github.com/marlonsantini/WaterSeven/blob/master/screenShot.png" width="300"><br>
-</p>
 
 <p align="center">
 ¡Monitorea tu consumo de agua! Desarrollada usando la librería Jetpack Compose para Android, esta app te permite controlar la cantidad de agua que bebes con solo unos toques en la pantalla de tu smartwatch.
