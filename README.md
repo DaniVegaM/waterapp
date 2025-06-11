@@ -12,14 +12,29 @@
 </p>
 
 <p align="center">
-Track your water consumption! Developed using the Jetpack Compose library for Android, this app allows you to monitor the amount of water you drink with just a few taps on your smartwatch screen.
+¡Monitorea tu consumo de agua! Desarrollada usando la librería Jetpack Compose para Android, esta app te permite controlar la cantidad de agua que bebes con solo unos toques en la pantalla de tu smartwatch.
 </p>
+
+## Autores / Authors
+- **Daniel Vega Miranda**
+- **Abraham Reyes Cuevas**
+
+## Características / Features
+- 💧 **Seguimiento de agua**: Registra tu consumo diario de agua
+- 🔔 **Notificaciones push**: Recibe motivación cada 1.5 litros consumidos
+- ⌚ **Optimizado para Wear OS**: Diseñado específicamente para smartwatches
+- 🎯 **Interfaz intuitiva**: Botones simples para agregar, quitar y reiniciar
+- 📊 **Progreso visual**: Indicador circular que muestra tu avance diario
 
 ## Tech stack & Open-source libraries
 - Minimum SDK level 30
 - [Kotlin](https://kotlinlang.org/)
 - [JetPack Compose](https://developer.android.com/jetpack/compose)
+- [Wear OS](https://developer.android.com/training/wearables)
+- [Wear Tiles](https://developer.android.com/training/articles/wear-tiles)
+- [Android Notifications](https://developer.android.com/develop/ui/views/notifications)
 
+## Arquitectura del proyecto / Project Architecture
 Modules Design:
 - App
   - Ui.theme
@@ -29,13 +44,25 @@ Modules Design:
     - Type
    - InfoWater
    - ProgressIndicatorWater
-   - CalculatorOperation
+   - WaterNotificationManager
+   - NotificationPermissionHelper
    - WearApp
    - MainActivity
+   - tile/
+     - MainTileService
+   - complication/
+     - MainComplicationService
+
+## Sistema de Notificaciones / Notification System
+La app incluye un sistema inteligente de notificaciones que:
+- Se activa cada 1.5 litros consumidos (1.5, 3.0, 4.5, 6.0, etc.)
+- Muestra mensaje motivacional: "¡Vas bien, sigue así!"
+- Incluye vibración personalizada
+- Compatible con Android 13+ (manejo automático de permisos)
 
 # License
 ```xml
-Designed and developed by .fingerfire - 2023 
+Designed and developed by Daniel Vega Miranda & Abraham Reyes Cuevas - 2025
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
