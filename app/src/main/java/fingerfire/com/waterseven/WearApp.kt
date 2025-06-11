@@ -10,7 +10,7 @@ import androidx.wear.compose.material.TimeText
 import fingerfire.com.waterseven.theme.WaterSevenOSTheme
 
 @Composable
-fun WearApp() {
+fun WearApp(notificationManager: WaterNotificationManager? = null) {
     WaterSevenOSTheme {
         Scaffold(
             modifier = Modifier
@@ -20,7 +20,7 @@ fun WearApp() {
                 TimeText()
             },
         ) {
-            ProgressIndicatorWater()
+            ProgressIndicatorWater(notificationManager)
         }
     }
 }

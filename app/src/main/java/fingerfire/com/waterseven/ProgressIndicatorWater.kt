@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.CircularProgressIndicator
 
 @Composable
-fun ProgressIndicatorWater() {
+fun ProgressIndicatorWater(notificationManager: WaterNotificationManager? = null) {
     val recomedByDay = 3.0f
     val progressOfDay: Float = count.value / recomedByDay
 
@@ -24,6 +24,6 @@ fun ProgressIndicatorWater() {
                 .fillMaxSize()
                 .padding(all = 10.dp)
         )
-        InfoWater()
+        InfoWater(notificationManager)
     }
 }

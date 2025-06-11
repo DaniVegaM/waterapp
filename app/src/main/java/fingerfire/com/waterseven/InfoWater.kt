@@ -27,8 +27,8 @@ import androidx.wear.compose.material.Text
 val count = mutableStateOf(0f)
 
 @Composable
-fun InfoWater() {
-    // Declaração do count
+fun InfoWater(notificationManager: WaterNotificationManager? = null) {
+    // Declaración del contador
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -40,23 +40,37 @@ fun InfoWater() {
                 .padding(vertical = 10.dp, horizontal = 30.dp),
             textAlign = TextAlign.Center,
             color = MaterialTheme.colors.primary,
-            text = "Você já bebeu ${count.value} litro de água hoje" // Resultado
+            text = if (count.value == 1f) {
+                "Ya has bebido ${count.value} litro de agua hoy"
+            } else {
+                "Ya has bebido ${count.value} litros de agua hoy"
+            }
         )
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Botões e lógica de incremento e decremento
+            // Botones y lógica de incremento y decremento
             Button(
-                onClick = { count.value += 0.5f },
+                onClick = { 
+                    val previousAmount = count.value
+                    count.value += 0.5f
+                    
+                    // Verificar si debemos mostrar una notificación
+                    notificationManager?.let { manager ->
+                        if (manager.shouldShowNotification(previousAmount, count.value)) {
+                            manager.showAchievementNotification(count.value)
+                        }
+                    }
+                },
                 modifier = Modifier
                     .padding(end = 8.dp)
                     .height(40.dp)
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_water),
-                    contentDescription = "Cup Water",
+                    contentDescription = "Añadir Agua",
                     modifier = Modifier
                         .size(ButtonDefaults.DefaultButtonSize)
                         .wrapContentSize(align = Alignment.Center),
@@ -73,7 +87,7 @@ fun InfoWater() {
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_remove_water),
-                    contentDescription = "Remove",
+                    contentDescription = "Quitar Agua",
                     modifier = Modifier
                         .size(ButtonDefaults.DefaultButtonSize)
                         .wrapContentSize(align = Alignment.Center),
@@ -88,13 +102,13 @@ fun InfoWater() {
                 onClick = { count.value = 0f },
                 modifier = Modifier.size(30.dp),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.Red, // Cor do fundo
-                    contentColor = Color.White // Cor do texto
+                    backgroundColor = Color.Red, // Color del fondo
+                    contentColor = Color.White // Color del texto
                 )
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_reset),
-                    contentDescription = "Reset",
+                    contentDescription = "Reiniciar",
                 )
             }
         }

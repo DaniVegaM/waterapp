@@ -8,10 +8,22 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 
 class MainActivity : ComponentActivity() {
+    
+    private lateinit var notificationManager: WaterNotificationManager
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Initialize notification manager
+        notificationManager = WaterNotificationManager(this)
+        
+        // Request notification permission if needed
+        if (NotificationPermissionHelper.shouldRequestPermission(this)) {
+            NotificationPermissionHelper.requestNotificationPermission(this)
+        }
+        
         setContent {
-            WearApp()
+            WearApp(notificationManager)
         }
     }
 }
